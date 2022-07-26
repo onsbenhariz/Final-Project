@@ -83,11 +83,11 @@ rect(xboxTop, yboxTop, boxTopWidth, boxTopHeight);//BOX 1
    
       
       rect( xbox1Section1, ybox1Section1, box1SectionsWidth, box1SectionsHeight);//THIN
-             if (draw == true && drawthin == true && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight ) strokeWeight (4);line (mouseX, mouseY, pmouseX, pmouseY);//BRUSH 
+             if (drawthin == true && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight ) strokeWeight (4);line (mouseX, mouseY, pmouseX, pmouseY);//BRUSH 
       rect( xbox1Section2, ybox1Section2, box1SectionsWidth, box1SectionsHeight);//MID
-                  if (draw == true && drawmid == true && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight ) strokeWeight (16);line (mouseX, mouseY, pmouseX, pmouseY);//BRUSH 
+                  if (drawmid == true && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight ) strokeWeight (16);line (mouseX, mouseY, pmouseX, pmouseY);//BRUSH 
       rect( xbox1Section3, ybox1Section3, box1SectionsWidth, box1SectionsHeight);//THICK
-                   if (draw == true && drawthick == true && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight ) strokeWeight (40);line (mouseX, mouseY, pmouseX, pmouseY);//BRUSH 
+                   if (drawthick == true && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight ) strokeWeight (40);line (mouseX, mouseY, pmouseX, pmouseY);//BRUSH 
 
 //END SIDE BAR NUMBER 1
 
@@ -99,12 +99,7 @@ rect(xboxTop, yboxTop, boxTopWidth, boxTopHeight);//BOX 1
 //
 void mousePressed ()
 {
-  if (mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight) {
-   if (draw == true) {
-     draw = false;
-   } else {
-     draw = true;
-   }
+  
  }
  drawthin = false;
  if (mouseX>xbox1Section1 && mouseX<xbox1Section1+box1SectionsWidth && mouseY>ybox1Section1 && mouseY<ybox1Section1+box1SectionsHeight) drawthin = true;
