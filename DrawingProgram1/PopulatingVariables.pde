@@ -7,11 +7,17 @@ float  xbox1Section1, ybox1Section1, xbox1Section2, ybox1Section2, xbox1Section3
 //SECTION TWO
 float xbox2, ybox2, box2Width, box2Height;
 float xboxTitle2, yboxTitle2, boxTitle2Width, boxTitle2Height;
+float showcolorx, showcolory, showcolorWidthx, showcolorHeight;
 float xbox2black1, ybox2black1, xbox2white2, ybox2white2, xbox2gray3, ybox2gray3, xbox2brown4, ybox2brown4, xbox2red5, ybox2red5, xbox2orange6, ybox2orange6, xbox2yellow7, ybox2yellow7, xbox2green8, ybox2green8, xbox2blue9, ybox2blue9, xbox2purple10, ybox2purple10, xbox2violet11, ybox2violet11, xbox2pink12, ybox2pink12, box2SectionsWidth, box2SectionsHeight;
 float xbox2eraser,ybox2eraser, xbox2random, ybox2random, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight;
-
 //END SECTION TWO
+//
+//SECTION THREE
+float xbox3, ybox3, box3Width, box3Height ;
+float xboxTitle3, yboxTitle3, boxTitle3Width, boxTitle3Height;
+float xbox3red1, ybox3red1, xbox3orange2, ybox3orange2, xbox3yellow3, ybox3yellow3, xbox3green4, ybox3green4, xbox3blue5, ybox3blue5, xbox3violet6, ybox3violet6, xbox3black7, ybox3black7, xbox3white8, ybox3white8, xbox3random9, ybox3random9, box3SectionsWidth, box3SectionsHeight;
 
+//END SECTION THREE
 
 
 
@@ -59,6 +65,10 @@ drawingDiameter = appWidth*1/100;
      boxTitle2Width = box2Width*4/10;
      boxTitle2Height = box2Height;
      // 
+     showcolorx = xborder;
+     showcolory = appHeight*1.25/5;
+     showcolorWidthx = appWidth *1/20;
+     showcolorHeight = appHeight*1/20;
         //
         xbox2black1 = appWidth*3.4/4;
         ybox2black1 = box2Height;
@@ -93,8 +103,40 @@ drawingDiameter = appWidth*1/100;
         ybox2random = box2Height + box2Height*3/4;
         box2SectionsBottomButtonsWidth = box2Width*3/10;
         box2SectionsBottomButtonsHeight = box2Height*1/4;
+////////////////////////////////////////////////////////////////
+  xbox3 = xborder ;
+  ybox3 = appHeight*2/5;
+  box3Width = appWidth*1/4;
+  box3Height = appHeight*1/5;
+  //   
+     xboxTitle3 = xborder;
+     yboxTitle3 = ybox3;
+     boxTitle3Width = box3Width*4/10;
+     boxTitle3Height = appHeight*1/5;  
+     //
+        xbox3red1 = appWidth*3.4/4;
+        ybox3red1 = ybox3;
+        xbox3orange2 = appWidth*3.6/4;
+        ybox3orange2 = ybox3;
+        xbox3yellow3 = appWidth*3.8/4;
+        ybox3yellow3 = ybox3;
+        xbox3green4 = appWidth*3.4/4;
+        ybox3green4 = ybox3 + box3Height*1/3;
+        xbox3blue5 = appWidth*3.6/4;
+        ybox3blue5 = ybox3 + box3Height*1/3;
+        xbox3violet6 = appWidth*3.8/4;
+        ybox3violet6 = ybox3 + box3Height*1/3;
+        xbox3black7 = appWidth*3.4/4;
+        ybox3black7 = ybox3 + box3Height*2/3;
+        xbox3white8 = appWidth*3.6/4;
+        ybox3white8 = ybox3 + box3Height*2/3;
+        xbox3random9 = appWidth*3.8/4;
+        ybox3random9 = ybox3 + box3Height*2/3;
+        box3SectionsWidth = box3Width*2/10;
+        box3SectionsHeight = box3Height*1/3; 
 
-        
+
+
 
 //END RECTS
 

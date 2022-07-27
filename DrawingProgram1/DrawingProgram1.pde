@@ -12,10 +12,12 @@ color mud = color(219, 128, 97), black = color(0, 0, 0), white = color(255, 255,
 color c1 = color(204, 153, 0);
 PFont font;
 String box1Title = "Brush Width";
-String box2Title = " Brush Color";
+String box2Title = " Brush Color", eraser = "Eraser" , randombrush = "Random";
+String box3Title = "Background Color", randombackground = "Random";
 int brushWidth = 1;
 float hex = #FFCC00;
 float r=0, g=0, b=0;
+float br,bg,bb;
 //
 void setup () 
 {
@@ -49,7 +51,7 @@ void setup ()
   //
   populatingvariables();
 
-
+  
 
 
   //Text Setup
@@ -65,6 +67,7 @@ void setup ()
 //
 void draw () 
 {
+  
   strokeWeight(brushWidth);
   stroke(r, g, b);
   
@@ -75,10 +78,12 @@ void draw ()
 
 
   //rect (xbox2, ybox2, box2Width, box2Height);
+  rect( showcolorx, showcolory, showcolorWidthx, showcolorHeight);
+  noStroke();
   rect (xboxTitle2, yboxTitle2, boxTitle2Width, boxTitle2Height);
-  stroke(0);
   fill(black);
   rect ( xbox2black1, ybox2black1, box2SectionsWidth, box2SectionsHeight);
+  stroke(0);
   strokeWeight(0);
   fill(white);
   rect ( xbox2white2, ybox2white2, box2SectionsWidth, box2SectionsHeight);
@@ -109,7 +114,7 @@ void draw ()
  stroke(0);
   
  
-
+//COLORS
  if (mousePressed && mouseX>xbox2black1 && mouseX<xbox2black1+box2SectionsWidth && mouseY>ybox2black1 && mouseY<ybox2black1+box2SectionsHeight) {
     r = 0; 
     g = 0; 
@@ -191,17 +196,21 @@ void draw ()
     g = 192; 
     b = 203;
   }
-
+ //END COLORS 
  
-
-
-
-
-
-
-
-
-
+ //ERASER
+ 
+  if (mousePressed && mouseX>xbox2eraser && mouseX<xbox2eraser+box2SectionsBottomButtonsWidth && mouseY>ybox2eraser  && mouseY<ybox2eraser+box2SectionsBottomButtonsHeight) {
+    stroke(xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+  }
+ //END ERASER
+ // RANDOM
+ if (mousePressed && mouseX>xbox2random && mouseX<xbox2random +box2SectionsBottomButtonsWidth && mouseY>ybox2random  && mouseY<ybox2random+box2SectionsBottomButtonsHeight) {
+    r = random(255); 
+    g = random(255);
+    b = random(255);
+  }
+ //END RANDOM
 
 
   //SIDE BAR NUMBER 1
@@ -213,17 +222,27 @@ void draw ()
   textAlign (CENTER, CENTER); 
   textFont(font, 25); //Change the number until it fits, largest font sizE
   text(box1Title, xboxTitle1, yboxTitle1, boxTitle1Width, boxTitle1Height);
+  textFont(font, 20); //Change the number until it fits, largest font sizE
+  text (eraser, xbox2eraser, ybox2eraser, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
+  text (randombrush, xbox2random, ybox2random, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
   fill(white); //Will change the fill() on all shapes the second time repeated in draw()
   //
 
-
+ //Images for line thickness  
   stroke(0);
   rect( xbox1Section1, ybox1Section1, box1SectionsWidth, box1SectionsHeight);//THIN
-  stroke(0);
+  strokeWeight(4);  // Default
+  line(1040, 20, 1180, 20);
+  strokeWeight(0);
   rect( xbox1Section2, ybox1Section2, box1SectionsWidth, box1SectionsHeight);//MID
-  stroke(0);
+     strokeWeight(16);  // Thicker
+         line(1040, 60, 1180, 60);
+  strokeWeight(0);
   rect( xbox1Section3, ybox1Section3, box1SectionsWidth, box1SectionsHeight);//THICK
-
+       strokeWeight(30);  // Beastly
+        line(1040, 100, 1180, 100);
+  strokeWeight(0);
+ //end images for line thickness 
 
 stroke(0);
   if (mousePressed && drawThinButton == true) {
@@ -235,11 +254,45 @@ stroke(0);
   }
   stroke(0);
   if (mousePressed && drawThickButton == true) {
-    brushWidth = 40;
+    brushWidth = 30;
   }
   stroke(0);
 
+//BACKGROUND STUFF
+rect (xbox3, ybox3, box3Width, box3Height);
+rect(xboxTitle3, yboxTitle3, boxTitle3Width, boxTitle3Height);
+fill (red);
+rect(xbox3red1, ybox3red1, box3SectionsWidth, box3SectionsHeight);
+fill (orange);
+rect (xbox3orange2, ybox3orange2, box3SectionsWidth, box3SectionsHeight);
+fill (yellow);
+rect (xbox3yellow3, ybox3yellow3, box3SectionsWidth, box3SectionsHeight);
+fill (green);
+rect (xbox3green4, ybox3green4, box3SectionsWidth, box3SectionsHeight);
+fill (blue);
+rect (xbox3blue5, ybox3blue5, box3SectionsWidth, box3SectionsHeight);
+fill (violet);
+rect (xbox3violet6, ybox3violet6, box3SectionsWidth, box3SectionsHeight);
+fill (black);
+rect (xbox3black7, ybox3black7, box3SectionsWidth, box3SectionsHeight);
+fill(white);
+rect (xbox3white8, ybox3white8, box3SectionsWidth, box3SectionsHeight);
+fill(white);
+rect (xbox3random9, ybox3random9, box3SectionsWidth, box3SectionsHeight);
 
+
+
+
+
+
+
+
+
+
+
+
+
+//END BACKGROUND STUFF
 
 
   //TEXT
@@ -247,6 +300,10 @@ stroke(0);
   textAlign (CENTER, CENTER); 
   textFont(font, 25); //Change the number until it fits, largest font sizE
   text(box2Title, xboxTitle2, yboxTitle2, boxTitle2Width, boxTitle2Height);
+  textFont(font, 18); //Change the number until it fits, largest font sizE
+  text (box3Title, xboxTitle3, yboxTitle3, boxTitle3Width, boxTitle3Height);
+  textFont(font, 10); //Change the number until it fits, largest font sizE
+  text (randombackground, xbox3random9, ybox3random9, box3SectionsWidth, box3SectionsHeight);
   fill(white); //Will change the fill() on all shapes the second time repeated in draw()
   stroke(0);
   //
@@ -265,6 +322,53 @@ void mousePressed ()
     }
   }
   //COLORS
+
+//BACKGROUND COLORS
+  if (mouseX>xbox3red1&& mouseX<xbox3red1 +box3SectionsWidth && mouseY>ybox3red1  && mouseY<ybox3red1+box3SectionsHeight) {
+    fill (red);
+    rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+    
+  }
+  if (mouseX>xbox3orange2&& mouseX<xbox3orange2 +box3SectionsWidth && mouseY>ybox3orange2  && mouseY<ybox3orange2+box3SectionsHeight) {
+    fill (orange);
+    rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+    
+  }
+  if (mouseX>xbox3yellow3&& mouseX<xbox3yellow3 +box3SectionsWidth && mouseY>ybox3yellow3  && mouseY<ybox3yellow3+box3SectionsHeight) {
+    fill (yellow);
+    rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+    
+  }
+  if (mouseX>xbox3green4 && mouseX<xbox3green4 +box3SectionsWidth && mouseY>ybox3green4  && mouseY<ybox3green4+box3SectionsHeight) {
+    fill (green);
+    rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+    
+  }
+  if (mouseX>xbox3blue5 && mouseX<xbox3blue5 +box3SectionsWidth && mouseY>ybox3blue5  && mouseY<ybox3blue5+box3SectionsHeight) {
+    fill (blue);
+    rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+    
+  }
+  if (mouseX>xbox3violet6 && mouseX<xbox3violet6 +box3SectionsWidth && mouseY>ybox3violet6  && mouseY<ybox3violet6 +box3SectionsHeight) {
+    fill (violet);
+    rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+    
+  }
+  if (mouseX>xbox3black7 && mouseX<xbox3black7 +box3SectionsWidth && mouseY>ybox3black7  && mouseY<ybox3black7+box3SectionsHeight) {
+    fill (black);
+    rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+    
+  }
+  if (mouseX>xbox3white8 && mouseX<xbox3white8 +box3SectionsWidth && mouseY>ybox3white8  && mouseY<ybox3white8+box3SectionsHeight) {
+    fill (white);
+    rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+    
+  }
+  if (mouseX>xbox3random9&& mouseX<xbox3random9 +box3SectionsWidth && mouseY>ybox3random9  && mouseY<ybox3random9+box3SectionsHeight) {
+    fill (random(255), random(255), random(255));
+    rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+    
+  }
 
   blackButton =false;
   if  (mouseX>xbox2black1 && mouseX<xbox2black1+box2SectionsWidth && mouseY>ybox2black1 && mouseY<ybox2black1+box2SectionsHeight); 
