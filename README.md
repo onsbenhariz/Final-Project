@@ -16,3 +16,10 @@ To do list
 - [ ] abibilty to save
 - [ ] undo button
 - [ ] 
+
+
+
+
+make it so thats it cliclk turn on, click tuurn off but you can also have that you can cliclk on it and it works and then when you cliclk a differnt one that turns on and the one you were just using turns off
+
+fix the problem where its not showing the proper color but shows the lat color shown, mabye have it so one one is on the other i false
