@@ -1,4 +1,4 @@
-import ddf.minim.*; //<>//
+import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
 import ddf.minim.signals.*;
@@ -525,7 +525,7 @@ void mousePressed ()
   if ( mouseX>xbox5loop4 && mouseX<xbox5loop4+box5SectionsWidth && mouseY>ybox5loop4 && mouseY<ybox5loop4+box5SectionsHeight) song.loop(); //Infinite Loop, no parameter OR -1
 
 
-
+if (mouseX>xbox5quit8 && mouseX<xbox5quit8+box5SectionsWidth && mouseY>ybox5quit8&& mouseY<ybox5quit8+box5SectionsWidth) exit();
 
 
 
