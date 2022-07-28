@@ -28,6 +28,7 @@ float xboxTitle4, yboxTitle4, boxTitle4Width, boxTitle4Height;
 //SECTION FIVE
 float xbox5, ybox5, box5Width, box5Height ;
 float xboxTitle5, yboxTitle5, boxTitle5Width, boxTitle5Height;
+float xbox5play1, ybox5play1, xbox5pause2, ybox5pause2, xbox5stop3, ybox5stop3, xbox5loop4, ybox5loop4, xbox5mute5, ybox5mute5, xbox5skipback6, ybox5skipback6, xbox5skipforward7, ybox5skipforward7, xbox5quit8, ybox5quit8, box5SectionsWidth, box5SectionsHeight;
 //END SECTION FIVE
 
 
@@ -170,7 +171,27 @@ drawingDiameter = appWidth*1/100;
      yboxTitle5 = ybox5;
      boxTitle5Width = box3Width*4/10;
      boxTitle5Height = appHeight*1/5;
-//END SECTION FIVE
+     //
+        xbox5play1 = appWidth*3.4/4;
+        ybox5play1 = ybox5;
+        xbox5pause2 = appWidth*3.55/4;
+        ybox5pause2 = ybox5;
+        xbox5stop3 = appWidth*3.7/4;
+        ybox5stop3 = ybox5;
+        xbox5loop4 = appWidth*3.85/4;
+        ybox5loop4 = ybox5;
+        xbox5mute5 = appWidth*3.4/4;
+        ybox5mute5 = ybox5 + box5Height*1/2;
+        xbox5skipback6 = appWidth*3.55/4;
+        ybox5skipback6 = ybox5 + box5Height*1/2;
+        xbox5skipforward7 = appWidth*3.7/4;
+        ybox5skipforward7 = ybox5 + box5Height*1/2;
+        xbox5quit8 = appWidth*3.85/4;
+        ybox5quit8 = ybox5 + box5Height*1/2;
+        box5SectionsWidth = box5Width*1.5/10;
+        box5SectionsHeight = box5Height*1/2; 
+        
+//END SECTION FIVE play,pause, stop, loop,mute, skip farword, skip back,
 
 
 

@@ -1,4 +1,4 @@
-import ddf.minim.*;
+import ddf.minim.*; //<>//
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
 import ddf.minim.signals.*;
@@ -6,18 +6,23 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
 //Global Variables
+Minim minim; //creates object to access all functions 
+AudioPlayer song; //creates a playlist
+AudioMetaData SongMetaData1;
 float xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter;
 Boolean draw=false, drawThinButton=false, drawMidButton=false, drawThickButton=false, blackButton=false, whiteButton=false, grayButton=false, brownButton=false, redButton=false, orangeButton=false, yellowButton=false, greenButton=false, blueButton=false, purpleButton=false, violetButton=false, pinkButton=false;
 color mud = color(219, 128, 97), black = color(0, 0, 0), white = color(255, 255, 255), gray = color(128, 128, 128), brown = color(150, 75, 0), red = color(255, 0, 0), orange = color(255, 165, 0), yellow = color(255, 255, 0), green = color(0, 255, 0), blue = color(0, 0, 255), purple = color(106, 13, 173), violet = color(215, 152, 247), pink = color(255, 192, 203);
 color c1 = color(204, 153, 0);
 PFont font;
 String box1Title = "Brush Width";
-String box2Title = " Brush Color", eraser = "Eraser" , randombrush = "Random";
+String box2Title = " Brush Color", eraser = "Eraser", randombrush = "Random";
 String box3Title = "Background Color", randombackground = "Random";
+String box5Title = "Music"; 
+String loopfunction = " plays forever if you click, to change this press keys 1-9 to choose number of repeats";
 int brushWidth = 1;
 float hex = #FFCC00;
 float r=0, g=0, b=0;
-float br,bg,bb;
+float br, bg, bb;
 //
 void setup () 
 {
@@ -51,7 +56,7 @@ void setup ()
   //
   populatingvariables();
 
-  
+
 
 
   //Text Setup
@@ -61,17 +66,20 @@ void setup ()
   font = createFont ("Bookman Old Style", 48); //Must also Tools / Create Font / Find Font / Do Not Press "OK"
   //
   //
-  fill(background);
   rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
   //
+  //SONG STUFF
+  minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage *
+  song = minim.loadFile("goodday.mp3"); //able to pass absolute path, file name & extenstion, and URL *
+  SongMetaData1 = song.getMetaData();
 } //End setup
 //
 void draw () 
 {
-  
+
   strokeWeight(brushWidth);
   stroke(r, g, b);
-  
+
   //BRUSH TOOL
   if (mousePressed && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight)
     line (mouseX, mouseY, pmouseX, pmouseY);
@@ -112,11 +120,11 @@ void draw ()
   rect(xbox2eraser, ybox2eraser, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
   fill(white);
   rect(xbox2random, ybox2random, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
- stroke(0);
-  
- 
-//COLORS
- if (mousePressed && mouseX>xbox2black1 && mouseX<xbox2black1+box2SectionsWidth && mouseY>ybox2black1 && mouseY<ybox2black1+box2SectionsHeight) {
+  stroke(0);
+
+
+  //COLORS
+  if (mousePressed && mouseX>xbox2black1 && mouseX<xbox2black1+box2SectionsWidth && mouseY>ybox2black1 && mouseY<ybox2black1+box2SectionsHeight) {
     r = 0; 
     g = 0; 
     b = 0;
@@ -135,8 +143,8 @@ void draw ()
     g = 128; 
     b = 128;
   }
-  
-  
+
+
   if (mousePressed && mouseX>xbox2brown4 && mouseX<xbox2brown4+box2SectionsWidth && mouseY>ybox2brown4 && mouseY<ybox2brown4+box2SectionsHeight) {
     r = 150; 
     g = 75; 
@@ -197,21 +205,21 @@ void draw ()
     g = 192; 
     b = 203;
   }
- //END COLORS 
- 
- //ERASER
- 
+  //END COLORS 
+
+  //ERASER
+
   if (mousePressed && mouseX>xbox2eraser && mouseX<xbox2eraser+box2SectionsBottomButtonsWidth && mouseY>ybox2eraser  && mouseY<ybox2eraser+box2SectionsBottomButtonsHeight) {
     stroke(xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
   }
- //END ERASER
- // RANDOM
- if (mousePressed && mouseX>xbox2random && mouseX<xbox2random +box2SectionsBottomButtonsWidth && mouseY>ybox2random  && mouseY<ybox2random+box2SectionsBottomButtonsHeight) {
+  //END ERASER
+  // RANDOM
+  if (mousePressed && mouseX>xbox2random && mouseX<xbox2random +box2SectionsBottomButtonsWidth && mouseY>ybox2random  && mouseY<ybox2random+box2SectionsBottomButtonsHeight) {
     r = random(255); 
     g = random(255);
     b = random(255);
   }
- //END RANDOM
+  //END RANDOM
 
 
   //SIDE BAR NUMBER 1
@@ -229,23 +237,23 @@ void draw ()
   fill(white); //Will change the fill() on all shapes the second time repeated in draw()
   //
 
- //Images for line thickness  
+  //Images for line thickness  
   stroke(0);
   rect( xbox1Section1, ybox1Section1, box1SectionsWidth, box1SectionsHeight);//THIN
   strokeWeight(4);  // Default
   line(1040, 20, 1180, 20);
   strokeWeight(0);
   rect( xbox1Section2, ybox1Section2, box1SectionsWidth, box1SectionsHeight);//MID
-     strokeWeight(16);  // Thicker
-         line(1040, 60, 1180, 60);
+  strokeWeight(16);  // Thicker
+  line(1040, 60, 1180, 60);
   strokeWeight(0);
   rect( xbox1Section3, ybox1Section3, box1SectionsWidth, box1SectionsHeight);//THICK
-       strokeWeight(30);  // Beastly
-        line(1040, 100, 1180, 100);
+  strokeWeight(30);  // Beastly
+  line(1040, 100, 1180, 100);
   strokeWeight(0);
- //end images for line thickness 
+  //end images for line thickness 
 
-stroke(0);
+  stroke(0);
   if (mousePressed && drawThinButton == true) {
     brushWidth = 4;
   }
@@ -258,38 +266,59 @@ stroke(0);
     brushWidth = 30;
   }
   stroke(0);
-//BACKGROUND STUFF
-rect (xbox3, ybox3, box3Width, box3Height);
-rect(xboxTitle3, yboxTitle3, boxTitle3Width, boxTitle3Height);
-fill (red);
-rect(xbox3red1, ybox3red1, box3SectionsWidth, box3SectionsHeight);
-fill (orange);
-rect (xbox3orange2, ybox3orange2, box3SectionsWidth, box3SectionsHeight);
-fill (yellow);
-rect (xbox3yellow3, ybox3yellow3, box3SectionsWidth, box3SectionsHeight);
-fill (green);
-rect (xbox3green4, ybox3green4, box3SectionsWidth, box3SectionsHeight);
-fill (blue);
-rect (xbox3blue5, ybox3blue5, box3SectionsWidth, box3SectionsHeight);
-fill (violet);
-rect (xbox3violet6, ybox3violet6, box3SectionsWidth, box3SectionsHeight);
-fill (black);
-rect (xbox3black7, ybox3black7, box3SectionsWidth, box3SectionsHeight);
-fill(white);
-rect (xbox3white8, ybox3white8, box3SectionsWidth, box3SectionsHeight);
-fill(white);
-rect (xbox3random9, ybox3random9, box3SectionsWidth, box3SectionsHeight);
-//END BACKGROUND STUFF
+  //BACKGROUND STUFF
+  rect (xbox3, ybox3, box3Width, box3Height);
+  rect(xboxTitle3, yboxTitle3, boxTitle3Width, boxTitle3Height);
+  fill (red);
+  rect(xbox3red1, ybox3red1, box3SectionsWidth, box3SectionsHeight);
+  fill (orange);
+  rect (xbox3orange2, ybox3orange2, box3SectionsWidth, box3SectionsHeight);
+  fill (yellow);
+  rect (xbox3yellow3, ybox3yellow3, box3SectionsWidth, box3SectionsHeight);
+  fill (green);
+  rect (xbox3green4, ybox3green4, box3SectionsWidth, box3SectionsHeight);
+  fill (blue);
+  rect (xbox3blue5, ybox3blue5, box3SectionsWidth, box3SectionsHeight);
+  fill (violet);
+  rect (xbox3violet6, ybox3violet6, box3SectionsWidth, box3SectionsHeight);
+  fill (black);
+  rect (xbox3black7, ybox3black7, box3SectionsWidth, box3SectionsHeight);
+  fill(white);
+  rect (xbox3white8, ybox3white8, box3SectionsWidth, box3SectionsHeight);
+  fill(white);
+  rect (xbox3random9, ybox3random9, box3SectionsWidth, box3SectionsHeight);
+  //END BACKGROUND STUFF
 
-//SECTION FOUR
-rect(xbox4, ybox4, box4Width, box4Height);
-rect(xboxTitle4, yboxTitle4, boxTitle4Width, boxTitle4Height);
-//END SECTION FOUR
-//
-//SECTION FIVE
-rect(xbox5, ybox5, box5Width, box5Height);
-rect(xboxTitle5, yboxTitle5, boxTitle5Width, boxTitle5Height);
-//END SECTION FIVE
+  //SECTION FOUR
+  rect(xbox4, ybox4, box4Width, box4Height);
+  rect(xboxTitle4, yboxTitle4, boxTitle4Width, boxTitle4Height);
+  //END SECTION FOUR
+  //
+  //SECTION FIVE
+  rect(xbox5, ybox5, box5Width, box5Height);
+  rect(xboxTitle5, yboxTitle5, boxTitle5Width, boxTitle5Height);
+  rect(xbox5play1, ybox5play1, box5SectionsWidth, box5SectionsHeight);
+  rect(xbox5pause2, ybox5pause2, box5SectionsWidth, box5SectionsHeight );
+  rect(xbox5stop3, ybox5stop3, box5SectionsWidth, box5SectionsHeight );
+  rect(xbox5loop4, ybox5loop4, box5SectionsWidth, box5SectionsHeight );
+  rect(xbox5mute5, ybox5mute5, box5SectionsWidth, box5SectionsHeight);
+  rect(xbox5skipback6, ybox5skipback6, box5SectionsWidth, box5SectionsHeight );
+  rect(xbox5skipforward7, ybox5skipforward7, box5SectionsWidth, box5SectionsHeight );
+  rect(xbox5quit8, ybox5quit8, box5SectionsWidth, box5SectionsHeight);
+  //MUSIC
+
+  if ( song.isLooping() && song.loopCount() !=-1) println("There are", song.loopCount(), "loops left.");
+  if ( song.isLooping() && song.loopCount() ==-1) println("Looping Infintley");
+  if  ( song.isPlaying() && !song.isLooping() ) println("Play Once");
+  println("Song Position", song.position(), "Song Length", song.length() );
+  println("Song Title", SongMetaData1.title() );
+  println("Author", SongMetaData1.author() ); 
+  println("Comment", SongMetaData1.comment() ); 
+
+
+
+
+  //END SECTION FIVE
 
   //TEXT
   fill(mud);
@@ -298,15 +327,36 @@ rect(xboxTitle5, yboxTitle5, boxTitle5Width, boxTitle5Height);
   text(box2Title, xboxTitle2, yboxTitle2, boxTitle2Width, boxTitle2Height);
   textFont(font, 18); //Change the number until it fits, largest font sizE
   text (box3Title, xboxTitle3, yboxTitle3, boxTitle3Width, boxTitle3Height);
+  text (box5Title, xboxTitle5, yboxTitle5, boxTitle5Width, boxTitle5Height);
   textFont(font, 10); //Change the number until it fits, largest font sizE
   text (randombackground, xbox3random9, ybox3random9, box3SectionsWidth, box3SectionsHeight);
+  if (mouseX>xbox5loop4 && mouseX<xbox5loop4+box5SectionsWidth && mouseY>ybox5loop4 && mouseY<ybox5loop4+box5SectionsHeight) {
+    textAlign (CENTER, BOTTOM);
+    textFont(font, 20); //Change the number until it fits, largest font sizE
+    text (loopfunction, xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight );
+    fill(white);
+  }
   fill(white); //Will change the fill() on all shapes the second time repeated in draw()
   stroke(0);
+
   //
 } //End draw
 //
 
-//End mouseDragged
+void keyPressed ()
+{
+  //Only press a number for this code below
+  println(key);
+  if ( key=='1') { //LOOP Function
+    if (key=='1') println("Looping Once");
+    String keystr = String.valueOf(key);
+    println("Number of Repeats is", keystr);
+    int loopNum = int(keystr);
+    song.loop(loopNum); //Parameter is Parameter is number of repeats
+    //if
+  }//End LOOP Functions
+  //
+}//End keyPressed
 void mousePressed ()
 {
 
@@ -319,51 +369,42 @@ void mousePressed ()
   }
   //COLORS
 
-//BACKGROUND COLORS
+  //BACKGROUND COLORS
   if (mouseX>xbox3red1&& mouseX<xbox3red1 +box3SectionsWidth && mouseY>ybox3red1  && mouseY<ybox3red1+box3SectionsHeight) {
     fill (red);
     rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
-    
   }
   if (mouseX>xbox3orange2&& mouseX<xbox3orange2 +box3SectionsWidth && mouseY>ybox3orange2  && mouseY<ybox3orange2+box3SectionsHeight) {
     fill (orange);
     rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
-    
   }
   if (mouseX>xbox3yellow3&& mouseX<xbox3yellow3 +box3SectionsWidth && mouseY>ybox3yellow3  && mouseY<ybox3yellow3+box3SectionsHeight) {
     fill (yellow);
     rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
-    
   }
   if (mouseX>xbox3green4 && mouseX<xbox3green4 +box3SectionsWidth && mouseY>ybox3green4  && mouseY<ybox3green4+box3SectionsHeight) {
     fill (green);
     rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
-    
   }
   if (mouseX>xbox3blue5 && mouseX<xbox3blue5 +box3SectionsWidth && mouseY>ybox3blue5  && mouseY<ybox3blue5+box3SectionsHeight) {
     fill (blue);
     rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
-    
   }
   if (mouseX>xbox3violet6 && mouseX<xbox3violet6 +box3SectionsWidth && mouseY>ybox3violet6  && mouseY<ybox3violet6 +box3SectionsHeight) {
     fill (violet);
     rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
-    
   }
   if (mouseX>xbox3black7 && mouseX<xbox3black7 +box3SectionsWidth && mouseY>ybox3black7  && mouseY<ybox3black7+box3SectionsHeight) {
     fill (black);
     rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
-    
   }
   if (mouseX>xbox3white8 && mouseX<xbox3white8 +box3SectionsWidth && mouseY>ybox3white8  && mouseY<ybox3white8+box3SectionsHeight) {
     fill (white);
     rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
-    
   }
   if (mouseX>xbox3random9&& mouseX<xbox3random9 +box3SectionsWidth && mouseY>ybox3random9  && mouseY<ybox3random9+box3SectionsHeight) {
     fill (random(255), random(255), random(255));
     rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
-    
   }
 
   blackButton =false;
@@ -412,6 +453,69 @@ void mousePressed ()
   drawThickButton = false;
   if (mouseX>xbox1Section3 && mouseX<xbox1Section3+box1SectionsWidth && mouseY>ybox1Section3 && mouseY<ybox1Section3+box1SectionsHeight) drawThickButton = true;
 
+
+
+
+
+  //First Play Button
+  if ( mouseX>xbox5play1 && mouseX<xbox5play1+box5SectionsWidth && mouseY>ybox5play1 && mouseY<ybox5play1+box5SectionsHeight) song.play(); //Parameter is milli-seconds from start of audio file to start playing //play button
+  //
+  //Alternate Play Button, as a finite loop() && infinite loop()
+  if (mouseX>xbox5mute5 && mouseX<xbox5mute5+box5SectionsWidth && mouseY>ybox5mute5 && mouseY<ybox5mute5+box5SectionsHeight) {//Mute Button
+    if (song.isMuted() ) {
+      song.unmute();
+    } else {
+      song.mute();
+    }
+  }//End Mute Button
+  //
+  if (mouseX>xbox5skipforward7 && mouseX<xbox5skipforward7+box5SectionsWidth && mouseY>ybox5skipforward7 && mouseY<ybox5skipforward7+box5SectionsHeight) song.skip(1000); //skip forward 1 second (1000 miliseconds)
+  if (mouseX>xbox5skipback6 && mouseX<xbox5skipback6+box5SectionsWidth && mouseY>ybox5skipback6 && mouseY<ybox5skipback6+box5SectionsHeight) song.skip(-1000); //skip backwards 1 second (1000 miliseconds);
+  //
+  if (mouseX>xbox5stop3 && mouseX<xbox5stop3+box5SectionsWidth && mouseY>ybox5stop3 && mouseY<ybox5stop3+box5SectionsHeight) {//STOP
+    if (song.isPlaying ()) {
+      song.pause();
+      song.rewind();
+    } else { //Song is not playing
+      song.rewind();
+    }
+  }//End STOP Button
+  //
+  if (mouseX>xbox5pause2 && mouseX<xbox5pause2+box5SectionsWidth && mouseY>ybox5pause2 && mouseY<ybox5pause2+box5SectionsHeight) {//PAUSE Button
+    if (song.isPlaying() ) {
+      song.pause();
+    } else if (song.position() >= song.length() - song.length()*1/5) {
+      song.rewind();
+      song.play();
+    } else {
+      song.play();
+    }
+  }//End PAUSE
+
+  /*int loopNum3 = 2; //Local variable plays once and loops twice
+   if ( key=='l' || key=='L') song1.loop(loopNum3); //Parameter is Parameter is number of repeats// loop button
+   */
+
+  if ( mouseX>xbox5loop4 && mouseX<xbox5loop4+box5SectionsWidth && mouseY>ybox5loop4 && mouseY<ybox5loop4+box5SectionsHeight) song.loop(); //Infinite Loop, no parameter OR -1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //End drawing tools
 } //End mousePressed
 //
@@ -420,9 +524,9 @@ void mousePressed ()
 //ellipse( mouseX, mouseY, drawingDiameter, drawingDiameter); //Example Circle Drawing Tool
 //END DRAWING BRUSH
 
-/* if (mousePressed && pinkButton ==true) { //<>//
-    r = 255; 
-    g = 192; 
-    b = 203;
-  }
-*/
+/* if (mousePressed && pinkButton ==true) {
+ r = 255; 
+ g = 192; 
+ b = 203;
+ }
+ */
