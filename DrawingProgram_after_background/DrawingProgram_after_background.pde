@@ -10,12 +10,12 @@ Minim minim; //creates object to access all functions
 AudioPlayer song; //creates a playlist
 AudioMetaData SongMetaData1;
 float xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter;
-Boolean  eraser=false, draw=false, drawThinButton=false, drawMidButton=false, drawThickButton=false, blackButton=false, whiteButton=false, grayButton=false, brownButton=false, redButton=false, orangeButton=false, yellowButton=false, greenButton=false, blueButton=false, purpleButton=false, violetButton=false, pinkButton=false;
+Boolean draw=false, drawThinButton=false, drawMidButton=false, drawThickButton=false, blackButton=false, whiteButton=false, grayButton=false, brownButton=false, redButton=false, orangeButton=false, yellowButton=false, greenButton=false, blueButton=false, purpleButton=false, violetButton=false, pinkButton=false;
 color mud = color(219, 128, 97), black = color(0, 0, 0), white = color(255, 255, 255), gray = color(128, 128, 128), brown = color(150, 75, 0), red = color(255, 0, 0), orange = color(255, 165, 0), yellow = color(255, 255, 0), green = color(0, 255, 0), blue = color(0, 0, 255), purple = color(106, 13, 173), violet = color(215, 152, 247), pink = color(255, 192, 203);
 color c1 = color(204, 153, 0);
 PFont font;
 String box1Title = "Brush Width";
-String box2Title = " Brush Color", erasertext = "Eraser", randombrush = "Random";
+String box2Title = " Brush Color", eraser = "Eraser", randombrush = "Random";
 String box3Title = "Background Color", randombackground = "Random";
 String box5Title = "Music", quit = "X"; 
 String loopfunction = " plays forever if you click, to change this press keys 1-9 to choose number of repeats";
@@ -220,12 +220,9 @@ void draw ()
 
   //ERASER
 
-  if (mousePressed && eraser==true && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight) {
-    ellipse( mouseX, mouseY, pmouseX, pmouseY ); //Example Circle Drawing Tool;
+  if (mousePressed && mouseX>xbox2eraser && mouseX<xbox2eraser+box2SectionsBottomButtonsWidth && mouseY>ybox2eraser  && mouseY<ybox2eraser+box2SectionsBottomButtonsHeight) {
+    stroke(xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
   }
-  
-  if (mousePressed && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight)
-    line (mouseX, mouseY, pmouseX, pmouseY);
   //END ERASER
   // RANDOM
   if (mousePressed && mouseX>xbox2random && mouseX<xbox2random +box2SectionsBottomButtonsWidth && mouseY>ybox2random  && mouseY<ybox2random+box2SectionsBottomButtonsHeight) {
@@ -246,7 +243,7 @@ void draw ()
   textFont(font, 25); //Change the number until it fits, largest font sizE
   text(box1Title, xboxTitle1, yboxTitle1, boxTitle1Width, boxTitle1Height);
   textFont(font, 20); //Change the number until it fits, largest font sizE
-  text (erasertext, xbox2eraser, ybox2eraser, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
+  text (eraser, xbox2eraser, ybox2eraser, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
   text (randombrush, xbox2random, ybox2random, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
   fill(white); //Will change the fill() on all shapes the second time repeated in draw()
   //
@@ -472,11 +469,6 @@ void mousePressed ()
   pinkButton =false;
   if  (mouseX>xbox2pink12 && mouseX<xbox2pink12 +box2SectionsWidth && mouseY>ybox2pink12  && mouseY<ybox2pink12+box2SectionsHeight); 
   pinkButton = true;
-
- eraser =false;
-if  (mouseX>xbox2eraser && mouseX<xbox2eraser+box2SectionsBottomButtonsWidth && mouseY>ybox2eraser  && mouseY<ybox2eraser+box2SectionsBottomButtonsHeight) eraser=true;
-
-
 
   //END COLORS
 
