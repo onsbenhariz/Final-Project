@@ -10,16 +10,17 @@ Minim minim; //creates object to access all functions
 AudioPlayer song; //creates a playlist
 AudioMetaData SongMetaData1;
 float xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter;
-Boolean draw=false, drawThinButton=false, drawMidButton=false, drawThickButton=false, blackButton=false, whiteButton=false, grayButton=false, brownButton=false, redButton=false, orangeButton=false, yellowButton=false, greenButton=false, blueButton=false, purpleButton=false, violetButton=false, pinkButton=false;
+Boolean  eraser=false, draw=false, drawThinButton=false, drawMidButton=false, drawThickButton=false, blackButton=false, whiteButton=false, grayButton=false, brownButton=false, redButton=false, orangeButton=false, yellowButton=false, greenButton=false, blueButton=false, purpleButton=false, violetButton=false, pinkButton=false;
 color mud = color(219, 128, 97), black = color(0, 0, 0), white = color(255, 255, 255), gray = color(128, 128, 128), brown = color(150, 75, 0), red = color(255, 0, 0), orange = color(255, 165, 0), yellow = color(255, 255, 0), green = color(0, 255, 0), blue = color(0, 0, 255), purple = color(106, 13, 173), violet = color(215, 152, 247), pink = color(255, 192, 203);
 color c1 = color(204, 153, 0);
 PFont font;
 String box1Title = "Brush Width";
-String box2Title = " Brush Color", eraser = "Eraser", randombrush = "Random";
+String box2Title = " Brush Color", erasertext = "Eraser", randombrush = "Random";
 String box3Title = "Background Color", randombackground = "Random";
-String box5Title = "Music"; 
+String box5Title = "Music", quit = "X"; 
 String loopfunction = " plays forever if you click, to change this press keys 1-9 to choose number of repeats";
 int brushWidth = 1;
+PImage img1,img2,img3, img4;
 float hex = #FFCC00;
 float r=0, g=0, b=0;
 float br, bg, bb;
@@ -66,12 +67,22 @@ void setup ()
   font = createFont ("Bookman Old Style", 48); //Must also Tools / Create Font / Find Font / Do Not Press "OK"
   //
   //
+  fill(black);
   rect( xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
   //
   //SONG STUFF
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage *
   song = minim.loadFile("goodday.mp3"); //able to pass absolute path, file name & extenstion, and URL *
   SongMetaData1 = song.getMetaData();
+  
+  
+  img1 = loadImage("loop.png");
+  img2 = loadImage("mute.png");
+  img3 = loadImage("rewind.png");
+  img4 = loadImage("forward.png");
+  
+  
+  
 } //End setup
 //
 void draw () 
@@ -84,7 +95,7 @@ void draw ()
   if (mousePressed && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight)
     line (mouseX, mouseY, pmouseX, pmouseY);
   //END BRUSH TOOL
-
+  
 
   //rect (xbox2, ybox2, box2Width, box2Height);
   rect( showcolorx, showcolory, showcolorWidthx, showcolorHeight);
@@ -209,9 +220,12 @@ void draw ()
 
   //ERASER
 
-  if (mousePressed && mouseX>xbox2eraser && mouseX<xbox2eraser+box2SectionsBottomButtonsWidth && mouseY>ybox2eraser  && mouseY<ybox2eraser+box2SectionsBottomButtonsHeight) {
-    stroke(xdrawingSurface, ydrawingSurface, drawingSurfaceWidth, drawingSurfaceHeight);
+  if (mousePressed && eraser==true && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight) {
+    ellipse( mouseX, mouseY, pmouseX, pmouseY ); //Example Circle Drawing Tool;
   }
+  
+  if (mousePressed && mouseX>xdrawingSurface && mouseX<xdrawingSurface+drawingSurfaceWidth && mouseY>ydrawingSurface && mouseY<ydrawingSurface+drawingSurfaceHeight)
+    line (mouseX, mouseY, pmouseX, pmouseY);
   //END ERASER
   // RANDOM
   if (mousePressed && mouseX>xbox2random && mouseX<xbox2random +box2SectionsBottomButtonsWidth && mouseY>ybox2random  && mouseY<ybox2random+box2SectionsBottomButtonsHeight) {
@@ -232,7 +246,7 @@ void draw ()
   textFont(font, 25); //Change the number until it fits, largest font sizE
   text(box1Title, xboxTitle1, yboxTitle1, boxTitle1Width, boxTitle1Height);
   textFont(font, 20); //Change the number until it fits, largest font sizE
-  text (eraser, xbox2eraser, ybox2eraser, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
+  text (erasertext, xbox2eraser, ybox2eraser, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
   text (randombrush, xbox2random, ybox2random, box2SectionsBottomButtonsWidth, box2SectionsBottomButtonsHeight);
   fill(white); //Will change the fill() on all shapes the second time repeated in draw()
   //
@@ -298,22 +312,36 @@ void draw ()
   rect(xbox5, ybox5, box5Width, box5Height);
   rect(xboxTitle5, yboxTitle5, boxTitle5Width, boxTitle5Height);
   rect(xbox5play1, ybox5play1, box5SectionsWidth, box5SectionsHeight);
+  fill(black);
+  triangle (1060, 510, 1030, 490, 1030, 530);
+  fill(white);
   rect(xbox5pause2, ybox5pause2, box5SectionsWidth, box5SectionsHeight );
+  fill(black);
+  strokeWeight (4);
+  line ( 1085, 500, 1085,520);
+  line ( 1095, 500, 1095,520);
+  fill(white);
+  strokeWeight(0);
   rect(xbox5stop3, ybox5stop3, box5SectionsWidth, box5SectionsHeight );
+  fill(black);
+    rect (1120, 495, 30,30);
+    fill(white);
   rect(xbox5loop4, ybox5loop4, box5SectionsWidth, box5SectionsHeight );
+   image(img1, xbox5loop4, ybox5loop4, box2SectionsWidth, box2SectionsHeight );
   rect(xbox5mute5, ybox5mute5, box5SectionsWidth, box5SectionsHeight);
+     image(img2, xbox5mute5, ybox5mute5, box2SectionsWidth, box2SectionsHeight);
   rect(xbox5skipback6, ybox5skipback6, box5SectionsWidth, box5SectionsHeight );
+     image(img3, xbox5skipback6, ybox5skipback6, imagewidth, imageheight);
   rect(xbox5skipforward7, ybox5skipforward7, box5SectionsWidth, box5SectionsHeight );
+     image(img4, xbox5skipforward7, ybox5skipforward7, box2SectionsWidth, box5SectionsHeight);
   rect(xbox5quit8, ybox5quit8, box5SectionsWidth, box5SectionsHeight);
+   
   //MUSIC
 
   if ( song.isLooping() && song.loopCount() !=-1) println("There are", song.loopCount(), "loops left.");
   if ( song.isLooping() && song.loopCount() ==-1) println("Looping Infintley");
   if  ( song.isPlaying() && !song.isLooping() ) println("Play Once");
-  println("Song Position", song.position(), "Song Length", song.length() );
-  println("Song Title", SongMetaData1.title() );
-  println("Author", SongMetaData1.author() ); 
-  println("Comment", SongMetaData1.comment() ); 
+  println("Song Position", song.position(), "Song Length", song.length() , "Song Title", SongMetaData1.title(), "Author", SongMetaData1.author(), "Comment", SongMetaData1.comment()  );
 
 
 
@@ -328,6 +356,7 @@ void draw ()
   textFont(font, 18); //Change the number until it fits, largest font sizE
   text (box3Title, xboxTitle3, yboxTitle3, boxTitle3Width, boxTitle3Height);
   text (box5Title, xboxTitle5, yboxTitle5, boxTitle5Width, boxTitle5Height);
+  text(quit, xbox5quit8, ybox5quit8, box5SectionsWidth, box5SectionsHeight);
   textFont(font, 10); //Change the number until it fits, largest font sizE
   text (randombackground, xbox3random9, ybox3random9, box3SectionsWidth, box3SectionsHeight);
   if (mouseX>xbox5loop4 && mouseX<xbox5loop4+box5SectionsWidth && mouseY>ybox5loop4 && mouseY<ybox5loop4+box5SectionsHeight) {
@@ -443,6 +472,11 @@ void mousePressed ()
   pinkButton =false;
   if  (mouseX>xbox2pink12 && mouseX<xbox2pink12 +box2SectionsWidth && mouseY>ybox2pink12  && mouseY<ybox2pink12+box2SectionsHeight); 
   pinkButton = true;
+
+ eraser =false;
+if  (mouseX>xbox2eraser && mouseX<xbox2eraser+box2SectionsBottomButtonsWidth && mouseY>ybox2eraser  && mouseY<ybox2eraser+box2SectionsBottomButtonsHeight) eraser=true;
+
+
 
   //END COLORS
 

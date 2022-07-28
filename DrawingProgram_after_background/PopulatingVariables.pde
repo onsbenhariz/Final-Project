@@ -17,7 +17,7 @@ float xbox2eraser,ybox2eraser, xbox2random, ybox2random, box2SectionsBottomButto
 //SECTION THREE
 float xbox3, ybox3, box3Width, box3Height ;
 float xboxTitle3, yboxTitle3, boxTitle3Width, boxTitle3Height;
-float xbox3red1, ybox3red1, xbox3orange2, ybox3orange2, xbox3yellow3, ybox3yellow3, xbox3green4, ybox3green4, xbox3blue5, ybox3blue5, xbox3violet6, ybox3violet6, xbox3black7, ybox3black7, xbox3white8, ybox3white8, xbox3random9, ybox3random9, box3SectionsWidth, box3SectionsHeight;
+float xbox3red1, ybox3red1, xbox3orange2, ybox3orange2, xbox3yellow3, ybox3yellow3, xbox3green4, ybox3green4, xbox3blue5, ybox3blue5, xbox3violet6, ybox3violet6, xbox3black7, ybox3black7, xbox3white8, ybox3white8, xbox3random9, ybox3random9, box3SectionsWidth, box3SectionsHeight, imagewidth, imageheight;
 //END SECTION THREE
 //
 //SECTION FOUR
@@ -190,6 +190,8 @@ drawingDiameter = appWidth*1/100;
         ybox5quit8 = ybox5 + box5Height*1/2;
         box5SectionsWidth = box5Width*1.5/10;
         box5SectionsHeight = box5Height*1/2; 
+        imagewidth = box5Width*1/10;
+        imageheight = box5Height*1.5/3;
         
 //END SECTION FIVE play,pause, stop, loop,mute, skip farword, skip back,
 
